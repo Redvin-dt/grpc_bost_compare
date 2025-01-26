@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package dump;
+
+message User {
+    string login = 1;
+    string password = 2;
+}
+
+message ServiceTextReply {
+    string text = 1;
+}
+
+service Register {
+    rpc RegisterUser (User) returns (ServiceTextReply) {};
+    rpc AutentificateUser (User) returns (ServiceTextReply) {};
+}

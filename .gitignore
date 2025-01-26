@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+build
+build_server
+build_client
+.vscode
+.cache
+
+*.pb.h
+*.pb.cc
