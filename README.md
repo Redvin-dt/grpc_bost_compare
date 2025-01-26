@@ -8,7 +8,7 @@ Implement dump user registration server on grpc and boost
 
     ```sh
 
-    [sudo] apt-get install build-essential autoconf libtool pkg-config libgflags-dev libgtest-dev clang libc++-dev libssl-dev cmake
+    sudo apt-get install build-essential autoconf libtool pkg-config libgflags-dev libgtest-dev clang libc++-dev libssl-dev cmake
     git clone https://github.com/grpc/grpc
     cd grpc
     git checkout origin/v1.67.x
@@ -67,4 +67,4 @@ Implement dump user registration server on grpc and boost
     ./register_client # run client
     ```
 
-## Boost TOOD
+## Boost (TODO)
