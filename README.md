@@ -4,7 +4,7 @@ Implement dump user registration server on grpc and boost
 
 ## Install prerequisite
 
-- grpc/protobuf
+- Grpc/Protobuf
 
     ```sh
 
@@ -41,30 +41,59 @@ Implement dump user registration server on grpc and boost
 
     ```
 
-- boost (TODO)
+- Boost
+    ``` 
+
+    sudo apt-get install libboost-all-dev 
+    git clone --recursive https://github.com/boostorg/boost.git
+    cd boost
+    ./bootstrap.sh
+    ./b2
+    
+    ```
+
 
 
 ## GRPC
 
-- generate proto
+- Generate proto
     ```sh
     #in grpc/
     PROTO_SRC_DIR=./protos
     protoc -I $PROTO_SRC_DIR --grpc_out=./protos --plugin=protoc-gen-grpc=`which grpc_cpp_plugin` $PROTO_SRC_DIR/server.proto  ## generate C++ server side code
     protoc -I $PROTO_SRC_DIR --cpp_out=./protos $PROTO_SRC_DIR/server.proto  ## generate C++ client side code
     ```
-- build targets
+- Build targets
     ```sh
     mkdir build && cd build
     cmake ..
     cmake --build . --target register_server # build server target
     cmake --build . --target register_client # build client target 
     ```
-- run
+- Run
     ```sh
     #in grpc/build/bin
     ./register_server # run server
     ./register_client # run client
     ```
 
-## Boost (TODO)
+## Boost
+
+- Examples from boost founders
+    https://www.boost.org/doc/libs/develop/libs/beast/doc/html/beast/examples.html
+
+- Build
+    ```sh
+    mkdir build && cd build
+    cmake ..
+    cmake --build . --target rest-server
+    ```
+
+- Run
+    ```sh
+    ./rest-server
+    ```
+
+## Repos that i use as examples
+- https://github.com/yeti01/rest-server/tree/main
+- https://github.com/Peter-Chou/grpc_cpp_hello_world/tree/master/protos
