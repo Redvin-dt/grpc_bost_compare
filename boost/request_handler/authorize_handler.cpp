@@ -9,7 +9,7 @@
 
 namespace json = boost::json;
 
-AuthorizeHandler::AuthorizeHandler(std::shared_ptr<std::map<std::string, std::string>> db) : db_(db) {}
+AuthorizeHandler::AuthorizeHandler(std::shared_ptr<std::map<std::string, UserData>> db) : db_(db) {}
 
 void AuthorizeHandler::handleRequest(
         const http::request<http::string_body>& req,
@@ -31,7 +31,7 @@ void AuthorizeHandler::handleRequest(
         throw NotFoundException("user with that login not found");
     }
 
-    if (db_->at(login) != password) {
+    if (db_->at(login).password != password) {
         throw AccessDenyException("invalid login or password");
     }
 
