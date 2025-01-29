@@ -4,10 +4,11 @@
 #include <boost/json.hpp>
 
 #include <memory>
+#include <sstream>
 
 namespace json = boost::json;
 
-RegisterHandler::RegisterHandler(std::shared_ptr<std::map<std::string, std::string>> db) : db_(db) {}
+RegisterHandler::RegisterHandler(std::shared_ptr<std::map<std::string, UserData>> db) : db_(db) {}
 
 void RegisterHandler::handleRequest(
         const http::request<http::string_body> &req,
@@ -15,10 +16,14 @@ void RegisterHandler::handleRequest(
 ) {
     std::string login;
     std::string password;
+    std::string university;
+    int age;
     try {
         auto body = json::parse(req.body());  
         login = static_cast<std::string> (body.at("login").as_string()); 
         password = static_cast<std::string>(body.at("password").as_string());
+        university = static_cast<std::string>(body.at("university").as_string());
+        age = static_cast<int>(body.at("age").as_int());
     } catch (...) {
         throw InvalidArgException("invalid body");
         // for easy impl think that code is perfect and throws error only on parse json
@@ -28,7 +33,8 @@ void RegisterHandler::handleRequest(
         throw AlreadyExistException("user with login: " + login + "already exists");
     }
 
-    (*db_)[login] = password;
+    UserData userData = {password, university, age};
+    (*db_)[login] = userData;
 
     std::stringstream resultBody;
     resultBody << "Successfuly registred " << login << "!\n";

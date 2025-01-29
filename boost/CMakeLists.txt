@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.22)
 
 project(rest-server)
 
@@ -16,6 +16,9 @@ add_executable(rest-server
     ${PROJECT_SOURCE_DIR}/request_handler/register_handler.cpp
     ${PROJECT_SOURCE_DIR}/request_factory/request_factory.cpp
     ${PROJECT_SOURCE_DIR}/exceptions/http_exceptions.cpp
+        request_handler/user_data.h
+        request_handler/profile_handler.h
+        request_handler/profile_handler.cpp
 )
 target_include_directories(rest-server PUBLIC ${PROJECT_SOURCE_DIR}/request_factory PUBLIC ${PROJECT_SOURCE_DIR}/request_handler PUBLIC ${PROJECT_SOURCE_DIR}/exceptions)
 
